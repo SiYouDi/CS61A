@@ -362,7 +362,7 @@ def time_per_word(words, timestamps_per_player):
     Arguments:
         words: a list of words, in the order they are typed.
         timestamps_per_player: A list of lists of timestamps including the time
-                          the player started typing, followed by the time
+                          the player started typing, followed by thethethethe time
                           the player finished typing each word.
 
     >>> p = [[75, 81, 84, 90, 92], [19, 29, 35, 36, 38]]
@@ -376,10 +376,10 @@ def time_per_word(words, timestamps_per_player):
     "*** YOUR CODE HERE ***"
     times=[]
     for i in range(0,len(timestamps_per_player)):
+        temp=[]
         for j in range(0,len(timestamps_per_player[i])-1):
-            temp=[]
             temp.append(timestamps_per_player[i][j+1]-timestamps_per_player[i][j])
-            times.append(temp)
+        times.append(temp)
     match={'words':words,'times':times}
     return match
     # END PROBLEM 9
@@ -404,6 +404,19 @@ def fastest_words(match):
     word_indices = range(len(get_all_words(match)))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    lists=[[] for _ in player_indices]
+    for i in word_indices:
+        mins=[]
+        word=get_word(match,i)
+        minTime=time(match,0,i)
+        minPlayer=0
+        for j in player_indices:
+            playTime=time(match,j,i)
+            if(playTime<minTime):
+                minTime=playTime
+                minPlayer=j
+        lists[minPlayer].append(word)
+    return lists
     # END PROBLEM 10
 
 
