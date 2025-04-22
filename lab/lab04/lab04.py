@@ -28,12 +28,16 @@ def buy(required_fruits, prices, total_amount):
         if fruits == [] and amount == 0:
             print(cart)
         elif fruits and amount > 0:
-            fruit = fruitsfruitsfruitsfruits[0]
-            price = [prices[fruit]*x for x in range(0,amount//prices[fruit]+1) if prices[fruit]*x <= amount ]   
-            for k in fruits:
-                for i in range(0,len(price)):
-                    add([k],amount-price[i], crat+display(fruit,i))
+            fruit = fruits[0]
+            #print(fruit)
+            price = [i*prices[fruit] for i in range(1,amount//prices[fruit]+1) if i*prices[fruit]<=amount]
+            #print(price)
+            for k in price:
+                #print(k)
+                #print(k//prices[fruit])
+                add(fruits[1:], amount-k,cart+display(fruit,k//prices[fruit]))
     add(required_fruits, total_amount, '')
+
 
 
 def display(fruit, count):
@@ -65,6 +69,11 @@ def distance(city_a, city_b):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    lat_a=get_lat(city_a)
+    lat_b=get_lat(city_b)
+    lon_a=get_lon(city_a)
+    lon_b=get_lon(city_b)
+    return sqrt((lat_a-lat_b)**2+(lon_a-lon_b)**2)
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -82,6 +91,13 @@ def closer_city(lat, lon, city_a, city_b):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    temp=make_city("temp",lat,lon)
+    dis_a=distance(temp,city_a)
+    dis_b=distance(temp,city_b)
+    if(dis_a<dis_b):
+        return get_name(city_a)
+    else:
+        return get_name(city_b)
 
 def check_city_abstraction():
     """
